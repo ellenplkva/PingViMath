@@ -1,0 +1,22 @@
+<resources>
+
+    <string name="pingVi_math">PingVi-Math</string>
+    <string name="fold">Сложи</string>
+    <string name="compare">Сравни</string>
+    <string name="selection">Подбери цифру</string>
+    <string name="substract">Вычти</string>
+    <string name="button_back">Назад</string>
+    <string name="level1">Уровень1</string>
+    <string name="levels">Уровень:</string>
+    <string name="button_less"> &lt; </string>
+    <string name="button_greater"> &gt;</string>
+    <string name="button_ravno"> = </string>
+    <string name="one"> 1 </string>
+    <string name="two"> 2 </string>
+    <string name="three"> 3 </string>
+    <string name="thou"> 4 </string>
+    <string name="five"> 5 </string>
+
+
+
+</resources>
