@@ -18,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -90,21 +92,23 @@ public class FoldLevel1 extends AppCompatActivity {
                 R.id.point11,R.id.point12,R.id.point13,R.id.point14,R.id.point15,
                 R.id.point16,R.id.point17,R.id.point18,R.id.point19,R.id.point20,
         };
+         ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int i = (numLeft+numRight) - 1 ; i<=(numLeft+numRight) +1 ; i++) {
+            list.add(new Integer(i));
+        }
+        Collections.shuffle(list);
 
 
 
-      /*  numAnsw1 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
+
+        numAnsw1 = list.get(0);
         btn1_fold_answ.setText(fold_array.numbers[numAnsw1]);
 
-        numAnsw2 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-        if(numAnsw1 == numAnsw2)
-            numAnsw2 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
+        numAnsw2 = list.get(1);
         btn2_fold_answ.setText(fold_array.numbers[numAnsw2]);
 
-        numAnsw3 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-        if(numAnsw2 == numAnsw3)
-            numAnsw3 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-        btn3_fold_answ.setText(fold_array.numbers[numAnsw3]);*/
+        numAnsw3 = list.get(2);
+        btn3_fold_answ.setText(fold_array.numbers[numAnsw3]);
         
 
           btn1_fold_answ.setOnTouchListener(new View.OnTouchListener() {
@@ -119,7 +123,7 @@ public class FoldLevel1 extends AppCompatActivity {
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // если отпустили палец
-                    if(numLeft+numRight == numAnsw1){
+                    if(numLeft+numRight-1 == numAnsw1){
                         if(count < 20){
                             count+=1;
                         }
@@ -136,7 +140,7 @@ public class FoldLevel1 extends AppCompatActivity {
                     }else
                     {
                         // если левая картинка меньше и ответ неверный
-                        if(numLeft+numRight != numAnsw1 && count > 1){
+                        if(count > 0){
                             count -= 1;
                         }
                     }
@@ -155,7 +159,7 @@ public class FoldLevel1 extends AppCompatActivity {
                     }else{
                         // палец отпустили значит надо генерить новые числа, но если ошибка в первом ответе, тогда надо ждать пока будет правильно
 
-                        /*if(count < 1){
+                        if(count < 1){
                             btn3_fold_answ.setEnabled(true);
                             btn2_fold_answ.setEnabled(true);
                             // выводится высплывающее сообщение " попробуй ещё раз"
@@ -165,7 +169,7 @@ public class FoldLevel1 extends AppCompatActivity {
                             toast.show();
 
                         }
-                        else {*/
+                        else {
                             numLeft = fold_random.nextInt(10);// генерирую случайное число
                             img_left.setImageResource(fold_array.images1_fold[numLeft]);// достаю картинку
 
@@ -174,24 +178,26 @@ public class FoldLevel1 extends AppCompatActivity {
                             numRight = fold_random.nextInt(10);
                             img_right.setImageResource(fold_array.images1_fold[numRight]);
 
+                            ArrayList<Integer> list = new ArrayList<Integer>();
+                            for (int i = (numLeft+numRight) - 1 ; i<=(numLeft+numRight) +1 ; i++) {
+                                list.add(new Integer(i));
+                            }
+                            Collections.shuffle(list);
 
-                            numAnsw1 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
+
+                            numAnsw1 = list.get(0);
                             btn1_fold_answ.setText(fold_array.numbers[numAnsw1]);
 
-                            numAnsw2 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                            if(numAnsw1 == numAnsw2){
-                                numAnsw2 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                                btn2_fold_answ.setText(fold_array.numbers[numAnsw2]);}
+                            numAnsw2 = list.get(1);
+                            btn2_fold_answ.setText(fold_array.numbers[numAnsw2]);
 
-                            numAnsw3 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                            if(numAnsw2 == numAnsw3){
-                                numAnsw3 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                                btn3_fold_answ.setText(fold_array.numbers[numAnsw3]);}
+                            numAnsw3 = list.get(2);
+                            btn3_fold_answ.setText(fold_array.numbers[numAnsw3]);
 
                                 // вкулючаем обратно кнопки
                                 btn2_fold_answ.setEnabled(true);
                                 btn3_fold_answ.setEnabled(true);
-                        //}
+                        }
 
                     }
                 }
@@ -211,7 +217,7 @@ public class FoldLevel1 extends AppCompatActivity {
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // если отпустили палец
-                    if(numLeft+numRight == numAnsw2){
+                    if(numLeft+numRight-1 == numAnsw2){
                         if(count < 20){
                             count+=1;
                         }
@@ -228,7 +234,7 @@ public class FoldLevel1 extends AppCompatActivity {
                     }else
                     {
                         // если левая картинка меньше и ответ неверный
-                        if(numLeft+numRight != numAnsw2){
+                        if(count > 0 ){
                             count -= 1;
                         }
                     }
@@ -247,7 +253,7 @@ public class FoldLevel1 extends AppCompatActivity {
                     }else{
                         // палец отпустили значит надо генерить новые числа, но если ошибка в первом ответе, тогда надо ждать пока будет правильно
 
-                       /* if(count < 1){
+                        if(count < 1){
                             btn3_fold_answ.setEnabled(true);
                             btn2_fold_answ.setEnabled(true);
                             // выводится высплывающее сообщение " попробуй ещё раз"
@@ -257,7 +263,7 @@ public class FoldLevel1 extends AppCompatActivity {
                             toast.show();
 
                         }
-                        else {*/
+                        else {
                             numLeft = fold_random.nextInt(10);// генерирую случайное число
                             img_left.setImageResource(fold_array.images1_fold[numLeft]);// достаю картинку
 
@@ -266,22 +272,24 @@ public class FoldLevel1 extends AppCompatActivity {
                             numRight = fold_random.nextInt(10);
                             img_right.setImageResource(fold_array.images1_fold[numRight]);
 
-                            numAnsw1 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
+                            ArrayList<Integer> list = new ArrayList<Integer>();
+                            for (int i = (numLeft+numRight) - 1 ; i<=(numLeft+numRight) +1 ; i++) {
+                                list.add(new Integer(i));
+                            }
+                            Collections.shuffle(list);
+
+                            numAnsw1 = list.get(0);
                             btn1_fold_answ.setText(fold_array.numbers[numAnsw1]);
 
-                            numAnsw2 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                            if(numAnsw1 == numAnsw2){
-                                numAnsw2 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                                btn2_fold_answ.setText(fold_array.numbers[numAnsw2]);}
+                            numAnsw2 = list.get(1);
+                            btn2_fold_answ.setText(fold_array.numbers[numAnsw2]);
 
-                            numAnsw3 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                            if(numAnsw2 == numAnsw3){
-                                numAnsw3 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                                btn3_fold_answ.setText(fold_array.numbers[numAnsw3]);}
+                            numAnsw3 = list.get(2);
+                            btn3_fold_answ.setText(fold_array.numbers[numAnsw3]);
                             // вкулючаем обратно кнопки
                             btn1_fold_answ.setEnabled(true);
                             btn3_fold_answ.setEnabled(true);
-                        //}
+                        }
 
                     }
                 }
@@ -301,7 +309,7 @@ public class FoldLevel1 extends AppCompatActivity {
 
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     // если отпустили палец
-                    if((numLeft+numRight) == numAnsw3){
+                    if(numLeft+numRight -1 == numAnsw3){
                         if(count < 20){
                             count+=1;
                         }
@@ -318,7 +326,7 @@ public class FoldLevel1 extends AppCompatActivity {
                     }else
                     {
                         // если левая картинка меньше и ответ неверный
-                        if(numLeft+numRight != numAnsw1){
+                        if(count > 0){
                             count -= 1;
                         }
                     }
@@ -337,7 +345,7 @@ public class FoldLevel1 extends AppCompatActivity {
                     }else{
                         // палец отпустили значит надо генерить новые числа, но если ошибка в первом ответе, тогда надо ждать пока будет правильно
 
-                        /*if(count < 1){
+                        if(count < 1){
                             btn1_fold_answ.setEnabled(true);
                             btn2_fold_answ.setEnabled(true);
                             // выводится высплывающее сообщение " попробуй ещё раз"
@@ -347,7 +355,7 @@ public class FoldLevel1 extends AppCompatActivity {
                             toast.show();
 
                         }
-                        else {*/
+                        else {
                             numLeft = fold_random.nextInt(10);// генерирую случайное число
                             img_left.setImageResource(fold_array.images1_fold[numLeft]);// достаю картинку
 
@@ -356,22 +364,24 @@ public class FoldLevel1 extends AppCompatActivity {
                             numRight = fold_random.nextInt(10);
                             img_right.setImageResource(fold_array.images1_fold[numRight]);
 
-                            numAnsw1 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
+                            ArrayList<Integer> list = new ArrayList<Integer>();
+                            for (int i = (numLeft+numRight) - 1 ; i<=(numLeft+numRight) +1 ; i++) {
+                                list.add(new Integer(i));
+                            }
+                            Collections.shuffle(list);
+
+                            numAnsw1 = list.get(0);
                             btn1_fold_answ.setText(fold_array.numbers[numAnsw1]);
 
-                            numAnsw2 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                            if(numAnsw1 == numAnsw2){
-                                numAnsw2 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                                btn2_fold_answ.setText(fold_array.numbers[numAnsw2]);}
+                            numAnsw2 = list.get(1);
+                            btn2_fold_answ.setText(fold_array.numbers[numAnsw2]);
 
-                            numAnsw3 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                            if(numAnsw2 == numAnsw3){
-                                numAnsw3 = ThreadLocalRandom.current().nextInt((numLeft+numRight-1),(numLeft+numRight+2));
-                                btn3_fold_answ.setText(fold_array.numbers[numAnsw3]);}
+                            numAnsw3 = list.get(2);
+                            btn3_fold_answ.setText(fold_array.numbers[numAnsw3]);
                             // вкулючаем обратно кнопки
                             btn2_fold_answ.setEnabled(true);
                             btn1_fold_answ.setEnabled(true);
-                       // }
+                        }
 
                     }
                 }
